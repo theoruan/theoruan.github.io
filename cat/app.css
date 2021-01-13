@@ -1,0 +1,53 @@
+/*Write your CSS in here*/
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:200,300,400,500,600,700,900);
+
+h1{
+	/*color:purple;*/
+	font-weight:200;
+	font-size:66px;
+	text-transform:uppercase;
+	border:5px dotted;
+}
+
+body {
+	background-color:#042069;
+	color:#26f335;
+	font-family:"Source Code Pro";
+	font-weight:200;
+}
+
+img{
+	height:400px;
+	border-radius:50%;
+}
+
+#main {
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;
+	height:100vh;
+}
+
+button{
+	margin:30px auto 0;
+	padding: 20px 25px;
+	background-color:#042069;
+	color:#f2f470;
+	font-size:15px;
+	text-align:center;
+	border:1px solid #26f335;
+	text-transform:uppercase;
+	text-decoration:none;
+	outline:none;
+	letter-spacing:4px;
+}
+	
+button:hover {
+	padding: 25px 30px;
+	background-color:#26f335;
+	color:#042069;
+	transition:0.8s;
+	text-decoration:underline;
+}
+
