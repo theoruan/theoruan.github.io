@@ -1,0 +1,118 @@
+body {
+	background-color:black;
+}
+
+#gameBoard {
+	border:1px solid black;
+	display:grid;
+	grid-template-columns:120px 120px 120px 120px 120px;
+	grid-template-rows:120px 120px 120px 120px 120px;
+	justify-content:center;
+	width:600px;
+	height:600px;
+	
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#gameBoard div {
+	background-color:#00EE00;
+	background-repeat:no-repeat;
+	background-size:cover;
+}
+
+.defuser {
+	background-image:url("images/defuser.png");
+}
+
+.totem {
+	background-image:url("images/totem.png");
+}
+
+.bomb {
+	background-image:url("images/bomb.png");
+}
+
+.wall {
+	background-image:url("images/wall.png");
+}
+
+.laserh{
+	background-image:url("images/laserh.png");
+}
+
+.laserv{
+	background-image:url("images/laserv.png");
+}
+
+.swamp {
+	background-image:url("images/swamp.png");
+}
+
+.theebisu{
+	background-image:url("images/theebisu.png");
+}
+
+.theebisl{
+	background-image:url("images/theebisl.png");
+}
+
+.theebisr{
+	background-image:url("images/theebisr.png");
+}
+
+.theebisd{
+	background-image:url("images/theebisd.png");
+}
+
+.theebisdefuseru{
+	background-image:url("images/theebisdefuseru.png");
+}
+
+.theebisdefuserl{
+	background-image:url("images/theebisdefuserl.png");
+}
+
+.theebisdefuserr{
+	background-image:url("images/theebisdefuserr.png");
+}
+
+.theebisdefuserd{
+	background-image:url("images/theebisdefuserd.png");
+}
+
+.laserpassu{
+	background-image:url("images/laserpass.png");
+}
+
+.laserpassl{
+	background-image:url("images/laserpass.png");
+}
+
+.laserpassr{
+	background-image:url("images/laserpass.png");
+}
+
+.laserpassd{
+	background-image:url("images/laserpass.png");
+}
+
+.enemyu{
+	background-image:url("images/enemyu.png");
+}
+
+.enemyl{
+	background-image:url("images/enemyl.png");
+}
+
+.enemyr{
+	background-image:url("images/enemyr.png");
+}
+
+.enemyd{
+	background-image:url("images/enemyd.png");
+}
+
+.bridge{
+	background-color:#800020 !important;
+}
