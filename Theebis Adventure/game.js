@@ -1,24 +1,32 @@
 const levels = [ 
 	// level 0
-	["bomb", "wall", "", "", "",
-	"laserh", "wall", "", "", "defuser",
-	"", "totem", "animate", "animate", "animate",
-	"", "swamp", "", "", "",
-	"", "laserv", "", "theebisup", ""],
+	["bomb", "swamp", "defuser", "", "",
+	"laserh", "swamp", "totem", "totem", "",
+	"animate", "bridge animate", "animate", "laserv animate", "animate",
+	"swamp", "swamp", "", "wall", "",
+	"", "", "", "wall", "theebisup"],
 	
 	// level 1
-	["bomb", "swamp", "", "", "",
-	"laserh", "swamp", "", "", "defuser",
-	"animate", "bridge animate", "animate", "animate", "animate",
-	"", "swamp", "", "", "",
-	"", "water", "theebisup", "", ""],
+	["", "", "laserv", "bomb", "swamp",
+	"", "wall", "swamp", "swamp", "",
+	"laserh", "totem", "animate", "animate", "defuser animate",
+	"", "swamp", "wall", "", "totem",
+	"", "", "laserv", "", "theebisup"],
 	
 	// level 2
-	["totem", "totem", "bomb", "totem", "totem",
-	"animate", "animate", "animate", "animate", "animate",
-	"swamp", "bridge", "swamp", "swamp", "swamp",
-	"", "", "", "laserh", "",
-	"defuser", "wall", "", "", "theebisup"]
+	["animate", "defuser animate", "wall", "bomb", "totem",
+	"totem", "", "totem", "", "",
+	"", "", "swamp", "swamp", "laserh",
+	"", "totem", "", "", "",
+	"", "", "", "totem", "theebisup"],
+	
+	// level 3
+	["animate", "", "", "", "",
+	"animate", "", "swamp", "swamp", "",
+	"animate", "swamp", "defuser", "", "",
+	"animate", "", "swamp", "swamp", "swamp",
+	"animate", "", "", "theebisup", "bomb"]
+	
   ]; // end of levels
 
 const gridBoxes = document.querySelectorAll("#gameBoard div");
@@ -29,6 +37,7 @@ var defuserOn = false; // is the defuser on?
 var currentLocationOfTheebis = 0;
 var currentAnimation; // allows 1 animation per level
 var widthOfBoard = 5;
+var enemySpeed = 0;
 
 // start game
 window.addEventListener("load", function() {
@@ -64,7 +73,6 @@ document.addEventListener("keydown", function (e) {
 // try to move horse
 function tryToMove(direction) {
 	
-	console.log("current Theebis location is " + currentLocationOfTheebis);
 	// location before move
 	let oldLocation = currentLocationOfTheebis;
 	
@@ -93,12 +101,14 @@ function tryToMove(direction) {
 			nextLocation = currentLocationOfTheebis + widthOfBoard;
 			break;
 	} // switch
-	console.log ("grid boxes is an " + typeof(gridBoxes) +  " with  this many items: " + gridBoxes.length);
-	console.log ("nextLocation is " + nextLocation);
+
 	nextClass = gridBoxes[nextLocation].className;
 	
 	// if the obstacle is not passable, don't move
 	if (noPassObstacles.includes(nextClass)){ return; }
+	
+	// if the next space had a bomb and the defuser isn't on, don't move
+	if (!defuserOn && nextClass.includes("bomb")){ return; }
 	
 	// if it's a laser, and there is no defuser, don't move
 	if (!defuserOn && nextClass.includes("laser")){ return; }
@@ -144,10 +154,10 @@ function tryToMove(direction) {
 				// get class of box after jump
 				nextClass = gridBoxes[currentLocationOfTheebis].className;
 				
-				// show horse and rider after landing
+				// show theebis and defuser after landing
 				gridBoxes[currentLocationOfTheebis].className = nextClass2;
 				
-				// if next box is a flag, go up a level
+				// if next box is a bomb, go up a level
 				levelUp(nextClass);
 				
 			}, 350);
@@ -157,7 +167,7 @@ function tryToMove(direction) {
 	}
 	
 	// if there is a defuser, add defuser
-	if (nextClass == "defuser") {
+	if (nextClass.includes("defuser")) {
 		defuserOn = true;
 	}
 	
@@ -179,7 +189,6 @@ function tryToMove(direction) {
 	
 	// move 1 spaces
 	currentLocationOfTheebis = nextLocation;
-	console.log("converting location " + currentLocationOfTheebis + " to " + newClass);
 	gridBoxes[currentLocationOfTheebis].className = newClass;
 	
 	// if it is an enemy, end the game
@@ -195,11 +204,15 @@ function tryToMove(direction) {
 
 function levelUp(nextClass) {
 	if (nextClass == "bomb" && defuserOn) {
-		document.getElementById("levelup").style.display = "block";
+		if (currentLevel <= 2) {
+			document.getElementById("levelup").style.display = "block";
+		} else {
+			document.getElementById("win").style.display = "block";
+		}
 		clearTimeout(currentAnimation);
 		setTimeout (function(){
 			document.getElementById("levelup").style.display = "none";
-			if (currentLevel <= 1) {
+			if (currentLevel <= 2) {
 				currentLevel++;
 				loadLevel();
 			}
@@ -209,6 +222,7 @@ function levelUp(nextClass) {
 
 // load levels 0 - maxlevel
 function loadLevel(){
+	enemySpeed = 650 - (currentLevel * 125)
 	let levelMap = levels[currentLevel];
 	let animateBoxes;
 	defuserOn = false;
@@ -227,7 +241,7 @@ function loadLevel(){
 
 // animate enemy left to right 
 function animateEnemy(boxes, index, direction) {
-	//exit function if no animation
+	// exit function if no animation
 	if (boxes.length <= 0) { return; }
 	
 	// update images
@@ -268,5 +282,5 @@ function animateEnemy(boxes, index, direction) {
 		
 	currentAnimation = setTimeout(function() {
 		animateEnemy(boxes, index, direction);
-	}, 750);
+	}, enemySpeed);
 } // animateEnemy

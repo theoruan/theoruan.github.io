@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
 
 body {
-	background-color:black;
+	background-color:#881188;
 }
 
 #gameBoard {
-	border:1px solid black;
+	border:5px solid #004400;
 	display:grid;
 	grid-template-columns:120px 120px 120px 120px 120px;
 	grid-template-rows:120px 120px 120px 120px 120px;
@@ -18,7 +18,7 @@ body {
 }
 
 #gameBoard div {
-	background-color:#00EE00;
+	background-color:#227744;
 	background-repeat:no-repeat;
 	background-size:cover;
 }
@@ -53,22 +53,18 @@ body {
 
 .theebisup{
 	background-image:url("images/theebisu.png");
-	z-index:1;
 }
 
 .theebisleft{
 	background-image:url("images/theebisl.png");
-	z-index:1;
 }
 
 .theebisright{
 	background-image:url("images/theebisr.png");
-	z-index:1;
 }
 
 .theebisdown{
 	background-image:url("images/theebisd.png");
-	z-index:1;
 }
 
 .theebisdefuserup{
@@ -131,10 +127,15 @@ body {
 	width:100%;
 	height:100%;
 	background-color:rgba(0,0,0,0.8);
-	color:white;
+	color:#993399;
 	font-family: 'Yusei Magic', sans-serif;
 	font-size:8em;
 	vertical-align:top;
 	text-align:center;
 	line-height:100vh;
+}
+
+#win {
+	text-align:left;
+	font-size:5em;
 }
